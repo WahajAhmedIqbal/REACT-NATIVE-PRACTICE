@@ -18,6 +18,10 @@ const StartGameScreen = (props) => {
     setEnteredVlue(enteredNumber.replace(/[^0-9]/g, ""));
   };
 
+  const resetHandlerButton = () => {
+    setEnteredVlue("");
+  };
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -40,7 +44,11 @@ const StartGameScreen = (props) => {
 
           <View style={styles.buttonContainer}>
             <View style={styles.btn1}>
-              <Button title="Reset" onPress={() => {}} color={Colors.primary} />
+              <Button
+                title="Reset"
+                onPress={resetHandlerButton}
+                color={Colors.primary}
+              />
             </View>
             <View style={styles.btn1}>
               <Button
