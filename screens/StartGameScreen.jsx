@@ -12,13 +12,22 @@ import Input from "../components/Input";
 import Colors from "../constants/colors";
 
 const StartGameScreen = (props) => {
-  const [enteredValue, setEnteredVlue] = useState();
+  const [enteredValue, setEnteredVlue] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+  const [selected, setSelected] = useState();
 
   const numberHandler = (enteredNumber) => {
     setEnteredVlue(enteredNumber.replace(/[^0-9]/g, ""));
   };
 
   const resetHandlerButton = () => {
+    setEnteredVlue("");
+    setConfirmed(false);
+    setSelected(parseInt(enteredValue));
+  };
+
+  const confirmInputHandler = () => {
+    setConfirmed(true);
     setEnteredVlue("");
   };
 
