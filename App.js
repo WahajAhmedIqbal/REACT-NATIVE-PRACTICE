@@ -3,12 +3,14 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
+import GameScreen from "./screens/GameScreen";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Header title="Guess a Number" />
+      <Header title=" Guess a Number" />
       <StartGameScreen />
+      <GameScreen />
     </View>
   );
 }
