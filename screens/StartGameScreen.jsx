@@ -6,9 +6,11 @@ import {
   Button,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import CardStyle from "../components/CardStyle";
 import Input from "../components/Input";
+import NumberContainer from "../components/NumberContainer";
 import Colors from "../constants/colors";
 
 const StartGameScreen = (props) => {
@@ -23,13 +25,38 @@ const StartGameScreen = (props) => {
   const resetHandlerButton = () => {
     setEnteredVlue("");
     setConfirmed(false);
-    setSelected(parseInt(enteredValue));
   };
 
   const confirmInputHandler = () => {
+    const choseNumber = parseInt(enteredValue);
+    if (isNaN(choseNumber) || choseNumber <= 0 || choseNumber > 99) {
+      Alert.alert(
+        "Invalid Number",
+        "Number has to be a number between 1 and 99 ",
+        [{ text: "Okay", style: "destructive", onPress: resetHandlerButton }]
+      );
+      return;
+    }
     setConfirmed(true);
+
+    setSelected(choseNumber);
     setEnteredVlue("");
+    Keyboard.dismiss();
   };
+
+  let confirmedOutput;
+
+  if (confirmed) {
+    confirmedOutput = (
+      <CardStyle style={styles.summerycard}>
+        <Text style={{ alignItems: "center" }}>you select</Text>
+        <View>
+          <NumberContainer>{selected}</NumberContainer>
+          <Button title="Start Game" />
+        </View>
+      </CardStyle>
+    );
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -62,12 +89,13 @@ const StartGameScreen = (props) => {
             <View style={styles.btn1}>
               <Button
                 title="Confirm"
-                onPress={() => {}}
+                onPress={confirmInputHandler}
                 color={Colors.secondray}
               />
             </View>
           </View>
         </CardStyle>
+        {confirmedOutput}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -101,6 +129,10 @@ const styles = StyleSheet.create({
   input: {
     width: 50,
     textAlign: "center",
+  },
+  summerycard: {
+    marginTop: 20,
+    alignItems: "center",
   },
 });
 
