@@ -52,7 +52,10 @@ const StartGameScreen = (props) => {
         <Text style={{ alignItems: "center" }}>you select</Text>
         <View>
           <NumberContainer>{selected}</NumberContainer>
-          <Button title="Start Game" />
+          <Button
+            title="Start Game"
+            onPress={() => props.onStartGame(selected)}
+          />
         </View>
       </CardStyle>
     );
